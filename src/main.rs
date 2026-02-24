@@ -37,7 +37,7 @@ async fn main() {
     let btn_bhs = TextButton::new(
         50.0, 500.0, 200.0, 50.0, "BHS", BLUE, GREEN, 30,
     );
- let img_out = StillImage::new(
+ let mut img_out = StillImage::new(
         "assets/bird2.png",
         100.0,  // width
         50.0,  // height
@@ -53,6 +53,7 @@ async fn main() {
 
         if btn_bhs.click() {
             lbl_msg.set_text("Bowmanville asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdHS");
+            img_out.set_texture("assets/1.png").await;
         }
         img_out.draw();
         lbl_msg.draw();

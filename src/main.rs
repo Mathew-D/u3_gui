@@ -11,7 +11,8 @@ use crate::modules::label::Label;
 use crate::modules::text_button::TextButton;
 use macroquad::prelude::*;
 use crate::modules::still_image::StillImage;
-
+  use crate::modules::preload_image::TextureManager;
+    use crate::modules::preload_image::LoadingScreenOptions;
 /// Set up window settings before the app runs
 fn window_conf() -> Conf {
     Conf {
@@ -28,6 +29,8 @@ fn window_conf() -> Conf {
 
 #[macroquad::main(window_conf)]
 async fn main() {
+    let tm = TextureManager::new();
+    tm.preload_with_loading_screen(&["assets/1.png", "assets/2.png", "assets/bird2.png"], None).await;
     let mut lbl_msg =
         Label::new("Hello\nWorld", 50.0, 50.0, 30);
     lbl_msg
@@ -53,7 +56,8 @@ async fn main() {
 
         if btn_bhs.click() {
             lbl_msg.set_text("Bowmanville asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdHS");
-            img_out.set_texture("assets/1.png").await;
+            img_out.set_preload(tm.get_preload("assets/1.png").unwrap());
+            
         }
         img_out.draw();
         lbl_msg.draw();
